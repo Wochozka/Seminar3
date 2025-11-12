@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from kostka import Kostka
-from lod import Lod
+from lod import Lod, Stihac, Korveta
 
 class Sektor:
     '''
@@ -17,6 +17,9 @@ class Sektor:
     def _vypis_lod(self, lod):
         print(lod)
         print(f'Trup: {lod.graficky_trup(lod._trup, lod._max_trup)}')
+        if isinstance(lod, Stihac):
+            print(f'Energie: {lod.graficka_energie()}')
+
     
     def souboj(self):
         import random
@@ -48,7 +51,7 @@ class Sektor:
         import time as _time
         if zprava:
             print(zprava)
-            _time.sleep(0.5)
+            _time.sleep(0.6)
     
     def _vycisti(self):
         import sys as _sys
@@ -71,11 +74,13 @@ if __name__ == '__main__':
     k = Kostka(30)
     l = Kostka(5)
 
-    lod1 = Lod('Ajax', 100, 20, 18, k)
-    lod2 = Lod('Baracuda', 100, 15, 22, l)
+    lod1 = Korveta('Ajax', 100, 20, 18, k)
+    lod2 = Stihac('Baracuda', 100, 15, 22, l, 60, 40)
+
     orion = Sektor("Orion", lod1, lod2, k)
     m = Sektor("Muchomurka", lod1, lod2, k)
+
     orion.souboj()
-    m.souboj()
+    # m.souboj()
 
 
